@@ -1,0 +1,4 @@
+<?php session_start(); include "config.php"; if(!isset($_SESSION["student_id"])){header("Location: login.php");exit;} $sid=(int)$_SESSION["student_id"];$rid=(int)($_POST["registration_id"]??0);$method=$_POST["payment_method"]??"";
+$q=mysqli_prepare($conn,"SELECT r.course_id,c.fees FROM registrations r JOIN courses c ON c.id=r.course_id WHERE r.id=? AND r.student_id=?");mysqli_stmt_bind_param($q,"ii",$rid,$sid);mysqli_stmt_execute($q);$d=mysqli_fetch_assoc(mysqli_stmt_get_result($q));if(!$d)die("Invalid registration.");
+$txn="TXN".date("YmdHis").rand(100,999);$q=mysqli_prepare($conn,"INSERT INTO payments(registration_id,student_id,course_id,amount,payment_method,transaction_id,payment_status) VALUES(?,?,?,?,?,?, 'PAID')");
+mysqli_stmt_bind_param($q,"iiidss",$rid,$sid,$d["course_id"],$d["fees"],$method,$txn);mysqli_stmt_execute($q);header("Location: bill.php?id=".mysqli_insert_id($conn));exit;?>

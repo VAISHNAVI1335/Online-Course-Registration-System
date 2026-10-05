@@ -1,0 +1,4 @@
+<?php session_start(); include "config.php"; if(!isset($_SESSION["student_id"])){header("Location: login.php");exit;} $sid=(int)$_SESSION["student_id"]; $cid=(int)($_GET["id"]??0);
+$q=mysqli_prepare($conn,"SELECT id FROM courses WHERE id=?"); mysqli_stmt_bind_param($q,"i",$cid); mysqli_stmt_execute($q); if(!mysqli_fetch_assoc(mysqli_stmt_get_result($q))) die("Invalid course.");
+$q=mysqli_prepare($conn,"SELECT id FROM registrations WHERE student_id=? AND course_id=?"); mysqli_stmt_bind_param($q,"ii",$sid,$cid); mysqli_stmt_execute($q); mysqli_stmt_store_result($q); if(mysqli_stmt_num_rows($q)>0){header("Location: my_courses.php");exit;}
+$q=mysqli_prepare($conn,"INSERT INTO registrations(student_id,course_id) VALUES(?,?)"); mysqli_stmt_bind_param($q,"ii",$sid,$cid); mysqli_stmt_execute($q); header("Location: payment.php?registration_id=".mysqli_insert_id($conn)); exit; ?>

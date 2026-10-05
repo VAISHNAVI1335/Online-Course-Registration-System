@@ -1,0 +1,6 @@
+<?php session_start(); include "config.php"; include "includes/header.php"; include "includes/navbar.php"; ?>
+<div class="container py-5"><div class="text-center mb-5"><p class="text-primary fw-bold">LEARN SOMETHING NEW</p><h2 class="section-title">Explore Courses</h2><p class="text-muted">Choose a course and start building your skills.</p></div>
+<div class="row g-4"><?php $r=mysqli_query($conn,"SELECT * FROM courses ORDER BY id DESC"); while($c=mysqli_fetch_assoc($r)){ ?>
+<div class="col-lg-4 col-md-6"><div class="card course-card shadow-sm h-100"><img src="images/<?php echo htmlspecialchars($c["image"]); ?>" class="card-img-top">
+<div class="card-body p-4"><span class="badge bg-primary-subtle text-primary mb-2"><?php echo htmlspecialchars($c["duration"]); ?></span><h5><?php echo htmlspecialchars($c["course_name"]); ?></h5><p class="text-muted"><?php echo htmlspecialchars($c["description"]); ?></p><div class="d-flex justify-content-between align-items-center"><strong class="fs-5">₹<?php echo number_format($c["fees"],2); ?></strong><a href="course_details.php?id=<?php echo $c["id"]; ?>" class="btn btn-primary">Details</a></div></div></div></div>
+<?php } ?></div></div><?php include "includes/footer.php"; ?>

@@ -1,0 +1,6 @@
+<?php session_start(); if(!isset($_SESSION["student_id"])){header("Location: login.php");exit;} include "includes/header.php"; include "includes/navbar.php"; ?>
+<div class="container py-5"><div class="dashboard-hero"><div><p class="text-muted mb-1">STUDENT DASHBOARD</p><h2>Welcome, <?php echo htmlspecialchars($_SESSION["student_name"]); ?> 👋</h2><p>Continue your learning journey.</p></div><a href="courses.php" class="btn btn-light">Browse Courses</a></div>
+<div class="row g-4 mt-3"><div class="col-md-4"><div class="dashboard-card"><div class="icon-circle">📚</div><h5>Available Courses</h5><a href="courses.php" class="btn btn-primary">View Courses</a></div></div>
+<div class="col-md-4"><div class="dashboard-card"><div class="icon-circle">🎓</div><h5>My Courses</h5><a href="my_courses.php" class="btn btn-success">My Courses</a></div></div>
+<div class="col-md-4"><div class="dashboard-card"><div class="icon-circle">👤</div><h5>My Profile</h5><a href="profile.php" class="btn btn-dark">Profile</a></div></div></div></div>
+<?php include "includes/footer.php"; ?>
