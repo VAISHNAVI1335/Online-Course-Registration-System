@@ -41,21 +41,7 @@ The system also provides an admin dashboard for managing courses, students and p
 - View Students
 - Manage Payments
 
-## 🗄️ Database
 
-The database file is available in:
-
-`sql/course_db.sql`
-
-## ▶️ How to Run
-
-1. Install XAMPP.
-2. Start Apache and MySQL.
-3. Copy the project folder into `C:\xampp\htdocs\`
-4. Open phpMyAdmin.
-5. Create the database.
-6. Import `sql/course_db.sql`.
-7. Open the project in your browser.
 
 ## 📁 Project Structure
 
